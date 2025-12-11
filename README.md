@@ -1,1 +1,1 @@
-## machine learning pipeline implentation
+## machine learning pipeline implementation
