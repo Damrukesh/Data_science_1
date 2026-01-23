@@ -1,1 +1,1 @@
-## machine learning pipeline implementation
+## Student scores data science project: machine learning pipeline implementation
