@@ -5,8 +5,11 @@ import pandas as pd
 from sklearn.metrics import r2_score
 from sklearn.model_selection import GridSearchCV
 
-from exception import CustomException
-from logger import logging
+# Add parent directory to path for imports
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from src.exception import CustomException
+from src.logger import logging
 
 def save_object(file_path, obj):
     try:
@@ -21,6 +24,7 @@ def save_object(file_path, obj):
 def evaluate_models(X_train, y_train, X_test, y_test, models, params):
     try:
         report = {}
+        fitted_models = {}
         
         for i in range(len(list(models))):
             model = list(models.values())[i]
@@ -32,6 +36,15 @@ def evaluate_models(X_train, y_train, X_test, y_test, models, params):
             y_test_pred = gs.predict(X_test)
             r2_square = r2_score(y_test, y_test_pred)
             report[list(models.keys())[i]] = r2_square
-        return report
+            # Store the fitted model
+            fitted_models[list(models.keys())[i]] = model
+        return report, fitted_models
     except Exception as e:
         raise CustomException(e, sys)    
+def load_object(file_path):
+    try:
+        import pickle
+        with open(file_path, 'rb') as file_obj:
+            return pickle.load(file_obj)
+    except Exception as e:
+        raise CustomException(e, sys)

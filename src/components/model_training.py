@@ -76,7 +76,7 @@ class ModelTrainer:
                 
             }
 
-            model_report: dict = evaluate_models(X_train, y_train, X_test, y_test, models, params)
+            model_report, fitted_models = evaluate_models(X_train, y_train, X_test, y_test, models, params)
 
             best_model_name = max(model_report, key=model_report.get)
             best_model_score = model_report[best_model_name]
@@ -86,7 +86,7 @@ class ModelTrainer:
             if best_model_score < 0.6:
                 raise CustomException("No suitable model found with R2 score above threshold.")
 
-            best_model = models[best_model_name]
+            best_model = fitted_models[best_model_name]
 
             save_object(
                 file_path=self.model_trainer_config.trained_model_file_path,

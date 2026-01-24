@@ -4,15 +4,15 @@ import os
 # Add parent directory to path for imports
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from data_transformation import DataTransformation
-from data_transformation import DataTransformationConfig
+from components.data_transformation import DataTransformation
+from components.data_transformation import DataTransformationConfig
 from exception import CustomException
 from logger import logging  
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
-from model_training import ModelTrainer
-from model_training import ModelTrainerConfig
+from components.model_training import ModelTrainer
+from components.model_training import ModelTrainerConfig
 @dataclass
 class DataIngestionConfig:
     train_data_path: str = os.path.join('artifacts', 'train.csv')
