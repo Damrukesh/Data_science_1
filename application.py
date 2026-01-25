@@ -4,8 +4,8 @@ import numpy as np
 from sklearn.preprocessing import StandardScaler
 from src.pipeline.predict_pipeline import PredictPipeline, Customdata
 
-application= Flask(__name__)
-app=application
+app= Flask(__name__)
+application=app
 @app.route('/')
 def index():
     return render_template('index.html')
