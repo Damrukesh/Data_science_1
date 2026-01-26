@@ -2,8 +2,8 @@ matplotlib
 numpy
 flask
 scikit-learn
-#-e.
+gunicorn
 seaborn
 pandas
-
-
+xgboost
+catboost

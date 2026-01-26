@@ -1,8 +1,12 @@
+import os
 import sys
 import pandas as pd
 from src.exception import CustomException
 from src.logger import logging
-from src.utils import load_object   
+from src.utils import load_object
+
+# Project root (directory containing 'src' and 'artifacts') for reliable paths on EB
+_PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 class Customdata:
         def __init__(self,gender: str,race_ethnicity: str,parental_level_of_education: str,
@@ -33,8 +37,8 @@ class PredictPipeline:
     def predict(self, features):
         try:
             logging.info("Loading preprocessor and model objects")
-            preprocessor_path = 'artifacts/preprocessor.pkl'
-            model_path = 'artifacts/model.pkl'
+            preprocessor_path = os.path.join(_PROJECT_ROOT, 'artifacts', 'preprocessor.pkl')
+            model_path = os.path.join(_PROJECT_ROOT, 'artifacts', 'model.pkl')
             preprocessor = load_object(preprocessor_path)
             model = load_object(model_path)
 
